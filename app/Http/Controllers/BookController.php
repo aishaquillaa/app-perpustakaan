@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreBookRequest;
 
 class BookController extends Controller
 {
@@ -11,7 +11,11 @@ class BookController extends Controller
      */
     public function index()
     {
-        return "BookController@index";
+        $books = [
+            ['id' => 1, 'title' => 'Laravel for Beginners', 'author' => 'John Doe', 'year' => 2023],
+            ['id' => 2, 'title' => 'Mastering PHP', 'author' => 'Jane Smith', 'year' => 2022],
+        ];
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -19,15 +23,16 @@ class BookController extends Controller
      */
     public function create()
     {
-        return "BookController@create";
+        return view('books.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        return "BookController@store";
+        $validated = $request->validated();
+        return redirect()->route('books.index')->with('success', 'Book created successfully!');
     }
 
     /**

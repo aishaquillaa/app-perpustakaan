@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreMemberRequest;
 
 class MemberController extends Controller
 {
@@ -11,7 +11,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        return "MemberController@index";
+        $members = [
+            ['id' => 1, 'name' => 'Aisyah', 'email' => 'ais.msbp@gmail.com'],
+        ];
+        return view('members.index', compact('members'));
     }
 
     /**
@@ -19,15 +22,16 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return "MemberController@create";
+        return view('members.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreMemberRequest $request)
     {
-        return "MemberController@store";
+        $validated = $request->validated();
+        return redirect()->route('members.index')->with('success', 'Member created successfully!');
     }
 
     /**
