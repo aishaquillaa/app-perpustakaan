@@ -12,6 +12,10 @@
                 <div style="color: red;">{{ $message }}</div>
             @enderror
         </div>
+        <div>
+            <label for="description">Deskripsi:</label>
+            <textarea id="description" name="description">{{ old('description') }}</textarea>
+        </div>
         <button type="submit">Simpan</button>
     </form>
 @endsection
