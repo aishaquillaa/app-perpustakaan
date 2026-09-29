@@ -15,6 +15,7 @@ Route::resource('categories', CategoryController::class)->except(['show']);
 Route::resource('loans', LoanController::class);
 Route::resource('members', MemberController::class);
 Route::put('loans/{loan}/return', [LoanController::class, 'returnBook'])->name('loans.return');
+Route::get('/members', [MemberController::class, 'index'])->name('members.index');
 Route::prefix('admin')->group(function () {
     Route::get('/info', function () {
         return 'Admin Info Page';
